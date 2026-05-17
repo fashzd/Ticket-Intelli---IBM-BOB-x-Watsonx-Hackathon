@@ -32,9 +32,13 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 !.env.local.example
 # Specifically ignore .env.local which contains sensitive credentials
 .env.local
+
+# test logs (may contain sensitive data)
+test-logs/*.log
 
 # vercel
 .vercel

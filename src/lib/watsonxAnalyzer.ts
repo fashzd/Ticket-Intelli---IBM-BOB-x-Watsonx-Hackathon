@@ -5,6 +5,7 @@
  */
 
 import { WatsonXAI } from "@ibm-cloud/watsonx-ai";
+import { IamAuthenticator } from "ibm-cloud-sdk-core";
 import { SampleTicket, TicketAnalysis } from "@/types/ticket";
 import { analyzeTicket as mockAnalyzeTicket } from "./mockAnalyzer";
 
@@ -24,9 +25,15 @@ function initializeWatsonX(): WatsonXAI | null {
   }
 
   try {
+    // Create IAM authenticator with API key
+    const authenticator = new IamAuthenticator({
+      apikey: apiKey,
+    });
+
     const watsonxAIService = WatsonXAI.newInstance({
       version: "2024-05-31",
       serviceUrl: url,
+      authenticator: authenticator,
     });
 
     return watsonxAIService;
@@ -111,13 +118,31 @@ Example structure:
  */
 function parseWatsonXResponse(responseText: string): TicketAnalysis | null {
   try {
-    // Remove any markdown code blocks if present
+    // Remove any markdown code blocks and extra text if present
     let cleanedText = responseText.trim();
-    if (cleanedText.startsWith("```")) {
+    
+    // Remove markdown headers and labels
+    cleanedText = cleanedText.replace(/\*\*JSON OUTPUT:\*\*/gi, "");
+    cleanedText = cleanedText.replace(/\*\*JSON:\*\*/gi, "");
+    
+    // Extract JSON from markdown code blocks
+    const jsonMatch = cleanedText.match(/```json\s*([\s\S]*?)\s*```/);
+    if (jsonMatch) {
+      cleanedText = jsonMatch[1];
+    } else if (cleanedText.includes("```")) {
+      // Remove any remaining code block markers
       cleanedText = cleanedText.replace(/```json\n?/g, "").replace(/```\n?/g, "");
     }
+    
+    // Find JSON object boundaries
+    const jsonStart = cleanedText.indexOf("{");
+    const jsonEnd = cleanedText.lastIndexOf("}");
+    
+    if (jsonStart !== -1 && jsonEnd !== -1 && jsonEnd > jsonStart) {
+      cleanedText = cleanedText.substring(jsonStart, jsonEnd + 1);
+    }
 
-    const parsed = JSON.parse(cleanedText);
+    const parsed = JSON.parse(cleanedText.trim());
 
     // Validate required fields
     const requiredFields = [

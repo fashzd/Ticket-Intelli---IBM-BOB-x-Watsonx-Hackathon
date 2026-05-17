@@ -313,7 +313,7 @@ Try it yourself! The application works out-of-the-box with intelligent mock anal
 
 ---
 
-### 📸 Application Screenshots
+### 📸 DEMO FLOW
 
 </div>
 
