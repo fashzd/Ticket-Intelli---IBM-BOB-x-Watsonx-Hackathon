@@ -1796,6 +1796,6 @@ Special thanks to the **IBM Bob Hackathon** for the inspiration and opportunity 
 
 **Made with** 🎫 **Ticket Inteli** • **Powered by** 🤖 **IBM watsonx.ai** • **Built with** ⚡ **Next.js**
 
-[🏠 Home](https://github.com/yourusername/ticket-inteli) • [📖 Docs](docs/) • [🚀 Deploy](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/ticket-inteli) • [⭐ Star](https://github.com/yourusername/ticket-inteli)
+[🏠 Home](https://github.com/fashzd/Ticket-Intelli---IBM-BOB-x-Watsonx-Hackathon) • [📖 Docs](docs/) • [🚀 Deploy](https://ticket-intelli-ibm-bob-x-watsonx-ha.vercel.app/) • [⭐ Star](https://github.com/fashzd/Ticket-Intelli---IBM-BOB-x-Watsonx-Hackathon)
 
 </div>
