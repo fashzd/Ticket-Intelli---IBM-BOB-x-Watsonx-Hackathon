@@ -9,8 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@carbon/icons-react": "^11.80.0",
     "@carbon/react": "^1.107.1",
     "@carbon/styles": "^1.106.0",
+    "@ibm-cloud/watsonx-ai": "^1.1.2",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
